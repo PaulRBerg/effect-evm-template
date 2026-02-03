@@ -1,10 +1,25 @@
+"use client";
+
 import type { LucideIcon } from "lucide-react";
-import { Code, Component, Layers, Package, Palette, Shield, Terminal, Zap } from "lucide-react";
+import {
+  Code,
+  Coins,
+  Component,
+  Github,
+  Layers,
+  Package,
+  Palette,
+  Shield,
+  Terminal,
+  Zap,
+} from "lucide-react";
 import Image from "next/image";
-import { Button } from "@/ui/Button";
-import { ContactForm } from "@/ui/ContactForm";
+import { useAccount } from "wagmi";
+
 import { SmartLink } from "@/ui/SmartLink";
 import { Timestamp } from "@/ui/Timestamp";
+import { TokenBalance, TransferForm } from "@/ui/token";
+import { WalletButton } from "@/ui/wallet";
 
 type TechItem = {
   name: string;
@@ -35,6 +50,20 @@ const TECH_STACK: TechItem[] = [
     name: "Effect-ts",
     url: "https://effect.website",
     version: "v3",
+  },
+  {
+    description: "Ethereum library",
+    icon: Coins,
+    name: "Viem",
+    url: "https://viem.sh",
+    version: "v2",
+  },
+  {
+    description: "React hooks",
+    icon: Layers,
+    name: "Wagmi",
+    url: "https://wagmi.sh",
+    version: "v2",
   },
   {
     description: "Type safety",
@@ -73,54 +102,45 @@ const TECH_STACK: TechItem[] = [
   },
 ];
 
-function HeaderSection() {
+function BackgroundDecoration() {
   return (
-    <>
-      <Image
-        alt="Next.js logo"
-        className="h-auto w-45 dark:invert"
-        height={0}
-        priority
-        src="/next.svg"
-        width={0}
-      />
-      <ol className="list-inside list-decimal text-center font-mono text-sm/6">
-        <li className="mb-2 tracking-[-.01em]">
-          Get started by editing{" "}
-          <code className="rounded bg-black/5 px-1 py-0.5 font-mono font-semibold dark:bg-white/6">
-            app/page.tsx
-          </code>
-          .
-        </li>
-        <li className="tracking-[-.01em]">Save and see your changes instantly.</li>
-      </ol>
-    </>
+    <div
+      aria-hidden
+      className="pointer-events-none fixed inset-0 -z-10 select-none overflow-hidden"
+    >
+      {/* Top-left: Effect purple orb */}
+      <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-gradient-to-br from-violet-600/10 to-blue-500/5 blur-3xl" />
+      {/* Bottom-right: Blue orb */}
+      <div className="absolute -right-40 -bottom-40 h-96 w-96 rounded-full bg-gradient-to-tl from-blue-500/10 to-violet-600/5 blur-3xl" />
+      {/* Center-right: Ethereum accent (lg only) */}
+      <div className="absolute top-1/3 right-10 hidden h-64 w-64 rotate-45 bg-gradient-to-br from-[#627eea]/8 to-[#8c8dfc]/5 blur-2xl lg:block" />
+    </div>
   );
 }
 
 function TechCard({ tech }: { tech: TechItem }) {
   return (
     <SmartLink
-      className="group cursor-pointer rounded-lg border border-black/8 bg-white/50 p-4 transition-colors hover:bg-black/5 dark:border-white/[.145] dark:bg-black/20 dark:hover:bg-white/5"
+      className="rounded-lg border border-black/8 bg-white/50 p-3 transition-colors hover:bg-black/5 dark:border-white/[.145] dark:bg-black/20 dark:hover:bg-white/5"
       href={tech.url}
     >
-      <tech.icon className="mb-2 h-6 w-6 text-black dark:text-white" />
+      <tech.icon className="mb-1 h-5 w-5 text-black dark:text-white" />
       <div className="font-semibold text-sm tracking-tight">
         {tech.name}
         {Boolean(tech.version) && (
           <span className="ml-1 text-gray-600 dark:text-gray-400">{tech.version}</span>
         )}
       </div>
-      <div className="mt-1 text-gray-600 text-xs dark:text-gray-400">{tech.description}</div>
+      <div className="mt-0.5 text-gray-600 text-xs dark:text-gray-400">{tech.description}</div>
     </SmartLink>
   );
 }
 
 function TechStackSection() {
   return (
-    <div className="flex flex-col gap-4">
-      <h2 className="text-center font-semibold text-lg sm:text-left">Built with Modern Tools</h2>
-      <div className="grid grid-cols-2 gap-3">
+    <div className="flex flex-col gap-3">
+      <h2 className="text-center font-semibold text-base">Built with Modern Tools</h2>
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
         {TECH_STACK.map((tech) => (
           <TechCard key={tech.name} tech={tech} />
         ))}
@@ -129,103 +149,76 @@ function TechStackSection() {
   );
 }
 
-function InteractiveUISection() {
+function Header() {
   return (
-    <div className="flex flex-col gap-4">
-      <h2 className="text-center font-semibold text-lg sm:text-left">
-        Interactive UI with Tailwind Variants
-      </h2>
-      <div className="flex flex-col gap-4">
-        {/* CVA Button Variants Demo */}
-        <div className="flex flex-col items-center gap-4 sm:flex-row">
-          <Button asChild size="md" variant="primary">
-            <SmartLink href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app">
-              <Image
-                alt="Vercel logomark"
-                className="h-5 w-5 dark:invert"
-                height={0}
-                src="/vercel.svg"
-                width={0}
-              />
-              Deploy now
-            </SmartLink>
-          </Button>
-          <Button asChild size="md" variant="secondary">
-            <SmartLink href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app">
-              Read our docs
-            </SmartLink>
-          </Button>
-        </div>
-
-        {/* Additional CVA Button Examples */}
-        <div className="flex flex-wrap items-center gap-2">
-          <Button size="sm" variant="ghost">
-            Ghost Button
-          </Button>
-          <Button size="sm" variant="primary">
-            Small Primary
-          </Button>
-          <Button size="lg" variant="secondary">
-            Large Secondary
-          </Button>
-        </div>
+    <header className="flex w-full items-center justify-between">
+      <div className="flex items-center gap-3">
+        <Image
+          alt="Next.js logo"
+          className="h-auto w-32 dark:invert"
+          height={0}
+          priority
+          src="/next.svg"
+          width={0}
+        />
+        <span className="font-semibold text-xl">+ Effect-EVM</span>
       </div>
-    </div>
+      <WalletButton />
+    </header>
   );
 }
 
-function FormSection() {
-  return (
-    <div className="flex flex-col gap-4">
-      <h2 className="text-center font-semibold text-lg sm:text-left">
-        Form Validation with Effect Schema
-      </h2>
-      <ContactForm />
-    </div>
-  );
-}
+function WalletSection() {
+  const { isConnected } = useAccount();
 
-function FooterLinks() {
+  if (!isConnected) {
+    return (
+      <div className="flex flex-col items-center gap-6 text-center">
+        <div className="flex items-center gap-3">
+          <Layers className="h-10 w-10 text-blue-500" />
+          <h1 className="font-bold text-4xl tracking-tight sm:text-5xl">Effect-EVM Template</h1>
+        </div>
+        <p className="max-w-md text-gray-600 text-lg dark:text-gray-400">
+          Connect your wallet to Ethereum view token balances and make transfers.
+        </p>
+        <SmartLink
+          className="flex items-center gap-2 text-gray-500 text-sm transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+          href="https://github.com/PaulRBerg/prb-effect"
+        >
+          <Github className="h-4 w-4" />
+          View Source
+        </SmartLink>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-wrap items-center justify-center gap-[24px]">
-      <Button asChild size="sm" variant="ghost">
-        <SmartLink href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app">
-          <Image alt="File icon" aria-hidden height={16} src="/file.svg" width={16} />
-          Learn
-        </SmartLink>
-      </Button>
-      <Button asChild size="sm" variant="ghost">
-        <SmartLink href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app">
-          <Image alt="Window icon" aria-hidden height={16} src="/window.svg" width={16} />
-          Examples
-        </SmartLink>
-      </Button>
-      <Button asChild size="sm" variant="ghost">
-        <SmartLink href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app">
-          <Image alt="Globe icon" aria-hidden height={16} src="/globe.svg" width={16} />
-          Go to nextjs.org →
-        </SmartLink>
-      </Button>
+    <div className="grid w-full max-w-2xl grid-cols-1 gap-8 md:grid-cols-2">
+      <div className="flex flex-col gap-4">
+        <h2 className="font-semibold text-lg">Token Balance</h2>
+        <TokenBalance />
+      </div>
+      <div className="flex flex-col gap-4">
+        <h2 className="font-semibold text-lg">Transfer Token</h2>
+        <TransferForm />
+      </div>
     </div>
   );
 }
 
 export default function Home() {
   return (
-    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-sans sm:p-20">
-      <main className="row-start-2 flex flex-col items-center gap-8">
-        <HeaderSection />
-
-        {/* Three Column Layout */}
-        <div className="grid w-full max-w-7xl grid-cols-1 gap-8 lg:grid-cols-3">
-          <TechStackSection />
-          <InteractiveUISection />
-          <FormSection />
-        </div>
+    <div className="flex min-h-screen flex-col items-center gap-12 p-8 font-sans">
+      <BackgroundDecoration />
+      <Header />
+      <main className="flex flex-1 flex-col items-center justify-center gap-8">
+        <WalletSection />
       </main>
-      <footer className="row-start-3 flex flex-col items-center justify-center gap-4">
-        <FooterLinks />
-        <Timestamp label="Template last updated" />
+      <footer className="w-full max-w-4xl">
+        <TechStackSection />
+        <div className="mt-4 flex justify-center">
+          <Timestamp label="Template last updated" />
+        </div>
       </footer>
     </div>
   );

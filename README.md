@@ -1,103 +1,71 @@
-# Next.js Template [![NextJS][next-badge]][next] [![Node.js Version][node-badge]][node-url] [![TypeScript Version][typescript-badge]][typescript-url] [![License: MIT][license-badge]][license-url]
+# Effect EVM Template [![NextJS][next-badge]][next] [![TypeScript Version][typescript-badge]][typescript-url] [![License: MIT][license-badge]][license-url]
 
 [next]: https://nextjs.org/
 [next-badge]: https://img.shields.io/badge/Next-black?style=flat&logo=next.js&logoColor=white
-[node-badge]: https://img.shields.io/badge/node-%3E%3D20-green
-[node-url]: https://nodejs.org
 [typescript-badge]: https://img.shields.io/badge/typescript-5.9-blue
 [typescript-url]: https://www.typescriptlang.org/
 [license-badge]: https://img.shields.io/badge/License-MIT-orange.svg
 [license-url]: https://opensource.org/licenses/MIT
 
-A modern Next.js template for building production-ready web applications.
-
-![Artwork](./artwork.jpg)
+An opinionated Next.js template for Ethereum apps built with Effect, Reown AppKit, Wagmi, and Viem.
 
 ## What's Inside
 
-This template provides:
-
-- **[`AGENTS.md`](https://modelcontextprotocol.io/)** — Context instructions for AI agents like Claude Code
-- **[MCP](https://modelcontextprotocol.io/)** — `.mcp.json` file with MCP server configuration
-- **[Next.js v16](https://nextjs.org)** - with App Router and React v19
-- **[Effect-ts](https://effect.website)** — type-safe functional programming and async effects
-- **[Vercel](https://vercel.com/guides/how-can-i-use-github-actions-with-vercel)** - for hosting and CI deployments
-- **[TypeScript v5](https://typescriptlang.org)** — type safety and enhanced developer experience
-- **[Tailwind CSS v4](https://tailwindcss.com)** — utility-first CSS framework for rapid styling
-- **[Bun](https://bun.sh)** — fast package manager and JavaScript runtime
-- **[BiomeJS](https://biomejs.dev)** — lightning-fast linting and formatting for TypeScript and JSON
-- **[Prettier](https://prettier.io)** — code formatting for Markdown and YAML files
-- **[Just](https://just.systems)** — command runner for streamlined task automation
-- **[Husky](https://typicode.github.io/husky)** - automated Git hooks for code quality
-
-Optimized for developer productivity and application performance.
-
-> [!NOTE]
->
-> Some of the configuration files depend upon the [Sablier DevKit](https://github.com/sablier-labs/devkit)
+- **[Effect v3](https://effect.website)** — typed functional effects
+- **[Effect-Next](https://github.com/PaulRBerg/effect-next)** — Effect handlers for Next.js
+- **[Effect-EVM](https://github.com/PaulRBerg/effect-evm)** — Effect layer for Wagmi
+- **[Reown AppKit](https://reown.com/appkit)** — wallet connection UI
+- **[Wagmi v2](https://wagmi.sh)** and **[Viem v2](https://viem.sh)** — Ethereum hooks + client
+- **[TanStack Query](https://tanstack.com/query/latest)** — server state
+- **[Next.js v16](https://nextjs.org)** — App Router with React v19
+- **[Tailwind CSS v4](https://tailwindcss.com)** — styling
+- **[Bun](https://bun.sh)**, **[ni](https://github.com/antfu-collective/ni)**, **[Just](https://just.systems)** — tooling
+- **[BiomeJS](https://biomejs.dev)** and **[Prettier](https://prettier.io)** — linting/formatting
+- **[Husky](https://typicode.github.io/husky)** — git hooks
+- **[Vercel](https://vercel.com)** — deploy workflow
+- **[`AGENTS.md`](./AGENTS.md)** — AI agent instructions
 
 ## Getting Started
 
-Click the [`Use this template`](https://github.com/PaulRBerg/next-template/generate) button to create a new repository.
+Click [`Use this template`](https://github.com/PaulRBerg/effect-evm-template/generate) to create a new repository.
 
 Or clone manually:
 
 ```bash
-git clone https://github.com/PaulRBerg/next-template.git my-app
+git clone git@github.com:PaulRBerg/effect-evm-template.git my-app
 cd my-app
 ```
 
-And then run:
+Install dependencies and list tasks:
 
 ```bash
-bun install
-bun husky
+ni
+na husky
 just --list
 ```
 
-New to Next.js? Check out these resources:
+## Environment Variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Next.js GitHub repository](https://github.com/vercel/next.js)
+Create `.env.local` from `.env.example` and set:
 
-## Prerequisites
-
-- [Bun](https://bun.sh)
-- [Ni](https://github.com/antfu-collective/ni)
-- [Just](https://just.systems)
+- `NEXT_PUBLIC_REOWN_PROJECT_ID` — required for wallet connect
+- `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`, `VERCEL_TOKEN` — required for `just deploy` and CI
 
 ## Usage
 
-Start the development server:
+Start the dev server:
 
 ```bash
 just dev
 ```
 
-The dev server starts on a random available port. Check the terminal output for the URL.
-
-### Vercel Deployment
-
-To make the CI deployment workflow work, you have to configure these environment variables in your GitHub Actions
-secrets:
-
-- `VERCEL_ORG_ID`
-- `VERCEL_PROJECT_ID`
-- `VERCEL_TOKEN`
-
-> [!TIP]
->
-> If you use the [`gh`](https://cli.github.com) CLI, you can put your environment variables in a `.env` file and then
-> run this command: `gh secret set -f .env`.
+Connect a wallet to view balances and make token transfers.
 
 ## Commands
 
 This template uses [Just](https://just.systems/) for task automation.
 
-### Development
-
-Make sure to run `bun install` first!
+### App
 
 | Command       | Description              |
 | ------------- | ------------------------ |
@@ -107,64 +75,21 @@ Make sure to run `bun install` first!
 | `just clean`  | Clean build artifacts    |
 | `just deploy` | Deploy to Vercel         |
 
-### Code Linting
+### Code Quality
 
 | Command             | Description            |
 | ------------------- | ---------------------- |
 | `just biome-check`  | Check code with Biome  |
-| `just biome-format` | Format code with Biome |
+| `just biome-lint`   | Lint code with Biome   |
+| `just biome-write`  | Fix Biome issues       |
 | `just full-check`   | Run all quality checks |
-| `just full-write`   | Fix all quality issues    |
-
-### Other Commands
+| `just full-write`   | Fix all quality issues |
 
 Run `just` to see all available commands.
 
-## Project Structure
-
-```tree
-├── .github/workflows/     # GitHub Actions (CI/CD)
-├── .husky/                # Git hooks configuration
-├── app/                   # Next.js App Router
-│   ├── api/health/        # Health check API route
-│   ├── favicon.ico        # Favicon
-│   ├── globals.css        # Global styles
-│   ├── layout.tsx         # Root layout
-│   └── page.tsx           # Home page
-├── lib/                   # Shared utilities
-│   ├── cn.ts              # Tailwind class merge utility
-│   └── effect/            # Effect-ts utilities
-├── public/                # Static files
-├── ui/                    # UI components
-├── CLAUDE.md              # AI agent instructions
-├── biome.jsonc            # Biome configuration
-├── justfile               # Just command definitions
-├── next.config.ts         # Next.js configuration
-├── package.json           # Package configuration
-├── postcss.config.mjs     # PostCSS configuration
-└── tsconfig.json          # TypeScript configuration
-```
-
-## Customization
-
-### Styling
-
-Customize the design system by editing:
-
-- `app/globals.css` — global styles and Tailwind directives
-- `postcss.config.mjs` — PostCSS configuration
-
-### Linting and Formatting
-
-Code quality is enforced with Biome. See `biome.jsonc` for configuration.
-
 ## Deployment
 
-Deploy easily with
-[Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme),
-the platform from Next.js creators.
-
-See the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for other options.
+Use `just deploy` for Vercel or run the GitHub Actions workflow in `.github/workflows/deploy.yml`.
 
 ## License
 
