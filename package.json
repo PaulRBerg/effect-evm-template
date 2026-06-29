@@ -25,8 +25,8 @@
     "wagmi": "^2.19.5"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.13",
-    "@sablier/devkit": "^1.12.1",
+    "@biomejs/biome": "^2.5.1",
+    "@prb/devkit": "^1.0.0",
     "@tailwindcss/postcss": "^4.1.18",
     "@types/node": "^24.10.9",
     "@types/react": "^19.2.10",
@@ -37,7 +37,7 @@
     "lint-staged": "^16.2.7",
     "prettier": "^3.8.1",
     "typescript": "^5.9.3",
-    "ultracite": "^7.1.1",
+    "ultracite": "^7.8.3",
     "vercel": "^50.9.6"
   },
   "scripts": {

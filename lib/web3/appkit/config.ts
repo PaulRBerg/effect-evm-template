@@ -47,6 +47,7 @@ export function createAppKitLayer() {
 
       const modal = createAppKit({
         adapters: [wagmiAdapter],
+        networks: chains,
         features: {
           analytics: false,
         },
@@ -56,7 +57,6 @@ export function createAppKitLayer() {
           name: "Effect-EVM Template",
           url: globalThis.location?.origin ?? "",
         },
-        networks: chains,
         projectId,
       });
 

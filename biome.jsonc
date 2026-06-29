@@ -1,11 +1,11 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "extends": [
-    "ultracite/core",
-    "ultracite/react",
-    "ultracite/next",
-    "@sablier/devkit/biome/base",
-    "@sablier/devkit/biome/ui"
+    "ultracite/biome/core",
+    "ultracite/biome/react",
+    "ultracite/biome/next",
+    "@prb/devkit/biome/base",
+    "@prb/devkit/biome/ui"
   ],
   "files": {
     "includes": ["**/*.{css,graphql,js,jsx,json,jsonc,ts,tsx}"]
