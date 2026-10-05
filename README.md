@@ -11,9 +11,9 @@ An opinionated Next.js template for Ethereum apps built with Effect, Reown AppKi
 
 ## What's Inside
 
-- **[Effect v3](https://effect.website)** — typed functional effects
-- **[Effect-Next](https://github.com/PaulRBerg/effect-next)** — Effect handlers for Next.js
-- **[Effect-EVM](https://github.com/PaulRBerg/effect-evm)** — Effect layer for Wagmi
+- **[Effect v4](https://effect.website)** — typed functional effects
+- **[Effect-Next](https://github.com/PaulRBerg/prb-effect/tree/main/next)** — Effect handlers for Next.js
+- **[Effect-EVM](https://github.com/PaulRBerg/prb-effect/tree/main/evm)** — Effect layer for Wagmi
 - **[Reown AppKit](https://reown.com/appkit)** — wallet connection UI
 - **[Wagmi v2](https://wagmi.sh)** and **[Viem v2](https://viem.sh)** — Ethereum hooks + client
 - **[TanStack Query](https://tanstack.com/query/latest)** — server state

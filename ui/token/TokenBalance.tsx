@@ -19,13 +19,14 @@ export function TokenBalance() {
       return Effect.succeed(Stream.empty);
     }
     return Effect.map(BalanceService, (balanceService) =>
-      Stream.repeatEffect(
+      Stream.fromEffectSchedule(
         balanceService.getTokenBalance({
           address,
           chainId,
           tokenAddress: token.address,
-        })
-      ).pipe(Stream.schedule(Schedule.spaced("10 seconds")))
+        }),
+        Schedule.spaced("10 seconds")
+      )
     );
   }, [address, chainId, token]);
 

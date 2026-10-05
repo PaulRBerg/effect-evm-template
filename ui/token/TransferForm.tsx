@@ -3,7 +3,7 @@
 import type { TxState } from "@prb/effect-evm";
 import { ContractPipeline } from "@prb/effect-evm";
 import { useEffectMemo, useStream } from "@prb/effect-evm/react-hooks";
-import { Effect, Scope, Stream } from "effect";
+import { Effect, Stream, SubscriptionRef } from "effect";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { Address } from "viem";
@@ -48,29 +48,27 @@ export function TransferForm() {
           return null;
         }
 
-        const scope = yield* Scope.make();
         const pipeline = yield* ContractPipeline;
 
-        const { stateRef, result } = yield* pipeline
-          .writeAndTrack({
-            abi: erc20Abi,
-            account: address,
-            address: token.address,
-            args: [recipient as Address, parsedAmount],
-            chainId,
-            functionName: "transfer",
-          })
-          .pipe(Scope.extend(scope));
+        // Tracking is scoped to this hook run: it stops when deps change or the component unmounts
+        const { stateRef, terminal } = yield* pipeline.writeAndTrack({
+          abi: erc20Abi,
+          account: address,
+          address: token.address,
+          args: [recipient as Address, parsedAmount],
+          chainId,
+          functionName: "transfer",
+        });
 
-        // Run the result effect in the background (forks and waits for completion)
-        yield* Effect.forkScoped(result);
+        // Wait for the terminal outcome in the background
+        yield* Effect.forkScoped(terminal);
 
         return { stateRef };
       }),
     [address, chainId, parsedAmount, recipient, submitTrigger, token]
   );
 
-  const stateStream = trackData?.stateRef?.changes ?? Stream.empty;
+  const stateStream = trackData ? SubscriptionRef.changes(trackData.stateRef) : Stream.empty;
 
   const { value: txState = initialTxState } = useStream(stateStream, {
     initial: initialTxState,

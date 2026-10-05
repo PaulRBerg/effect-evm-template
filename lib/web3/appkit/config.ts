@@ -20,10 +20,9 @@ export type AppKitServiceShape = {
   modal: ReturnType<typeof createAppKit>;
 };
 
-export class AppKitService extends Context.Tag("AppKitService")<
-  AppKitService,
-  AppKitServiceShape
->() {}
+export class AppKitService extends Context.Service<AppKitService, AppKitServiceShape>()(
+  "AppKitService"
+) {}
 
 export function createAppKitLayer() {
   return Layer.effect(
