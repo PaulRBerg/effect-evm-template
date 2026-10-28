@@ -30,7 +30,7 @@ const tailwindSelectors = [
 
 /**
  * ESLint owns all Tailwind CSS semantics: class ordering, canonicalization, and correctness.
- * Biome's useSortedClasses is disabled locally because it lacks a Tailwind v4 sort preset.
+ * Devkit disables Biome's useTailwindSortedClasses because ESLint owns class ordering.
  * @see {@link file://./biome.jsonc}
  * @see https://github.com/schoero/eslint-plugin-better-tailwindcss
  */

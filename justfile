@@ -49,6 +49,12 @@ alias d := deploy
     just _run-with-status eslint-write
     just _run-with-status prettier-write
 
+# Type check with TypeScript's native compiler
+[group("checks"), no-cd]
+[arg("project", long, short, help="Path to tsconfig.json")]
+type-check project="tsconfig.json":
+    na tsgo --noEmit --project {{ project }}
+
 # ---------------------------------------------------------------------------- #
 #                                    ESLINT                                    #
 # ---------------------------------------------------------------------------- #

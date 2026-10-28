@@ -5,7 +5,6 @@ import {
   Code,
   Coins,
   Component,
-  Github,
   Layers,
   Package,
   Palette,
@@ -185,7 +184,7 @@ function WalletSection() {
           className="flex items-center gap-2 text-sm text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
           href="https://github.com/PaulRBerg/prb-effect"
         >
-          <Github className="size-4" />
+          <Code className="size-4" />
           View Source
         </SmartLink>
       </div>

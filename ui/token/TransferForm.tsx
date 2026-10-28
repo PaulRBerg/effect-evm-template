@@ -159,20 +159,20 @@ export function TransferForm() {
         )}
       </Button>
 
-      {isConfirmed && txHash && chainId && (
+      {isConfirmed && txHash !== null && chainId !== null ? (
         <div className="rounded-lg bg-green-50 p-3 text-sm text-green-800 dark:bg-green-900/20 dark:text-green-400">
           Transaction confirmed!{" "}
           <SmartLink className="underline" href={getBlockExplorerTxUrl(chainId, txHash)}>
             View on Etherscan
           </SmartLink>
         </div>
-      )}
+      ) : null}
 
-      {isFailed && (
+      {isFailed ? (
         <div className="rounded-lg bg-red-50 p-3 text-sm text-red-800 dark:bg-red-900/20 dark:text-red-400">
           Transaction failed. Please try again.
         </div>
-      )}
+      ) : null}
     </form>
   );
 }
