@@ -19,8 +19,10 @@ An opinionated Next.js template for Ethereum apps built with Effect, Reown AppKi
 - **[TanStack Query](https://tanstack.com/query/latest)** — server state
 - **[Next.js v16](https://nextjs.org)** — App Router with React v19
 - **[Tailwind CSS v4](https://tailwindcss.com)** — styling
-- **[Bun](https://bun.sh)**, **[ni](https://github.com/antfu-collective/ni)**, **[Just](https://just.systems)** — tooling
+- **[Bun](https://bun.sh)**, **[ni](https://github.com/antfu-collective/ni)**, **[Just](https://just.systems)** —
+  tooling
 - **[BiomeJS](https://biomejs.dev)** and **[Prettier](https://prettier.io)** — linting/formatting
+- **[ESLint](https://eslint.org)** — Tailwind CSS class validation and React Hooks dependencies
 - **[Husky](https://typicode.github.io/husky)** — git hooks
 - **[Vercel](https://vercel.com)** — deploy workflow
 - **[`AGENTS.md`](./AGENTS.md)** — AI agent instructions
@@ -51,6 +53,9 @@ Create `.env.local` from `.env.example` and set:
 - `NEXT_PUBLIC_REOWN_PROJECT_ID` — required for wallet connect
 - `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`, `VERCEL_TOKEN` — required for `just deploy` and CI
 
+Just loads `.env.local` when present, including for local deployment. Existing shell and CI environment variables take
+precedence; the file is optional. CI continues to inject deployment credentials from GitHub Actions secrets.
+
 ## Usage
 
 Start the dev server:
@@ -77,13 +82,15 @@ This template uses [Just](https://just.systems/) for task automation.
 
 ### Code Quality
 
-| Command             | Description            |
-| ------------------- | ---------------------- |
-| `just biome-check`  | Check code with Biome  |
-| `just biome-lint`   | Lint code with Biome   |
-| `just biome-write`  | Fix Biome issues       |
-| `just full-check`   | Run all quality checks |
-| `just full-write`   | Fix all quality issues |
+| Command             | Description              |
+| ------------------- | ------------------------ |
+| `just biome-check`  | Check code with Biome    |
+| `just biome-lint`   | Lint code with Biome     |
+| `just biome-write`  | Fix Biome issues         |
+| `just eslint-check` | Check Tailwind and Hooks |
+| `just eslint-write` | Fix ESLint issues        |
+| `just full-check`   | Run all quality checks   |
+| `just full-write`   | Fix all quality issues   |
 
 Run `just` to see all available commands.
 

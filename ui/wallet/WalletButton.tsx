@@ -28,7 +28,7 @@ export function WalletButton() {
 
   return (
     <Button onClick={() => open()} size="md" variant="primary">
-      <Wallet className="h-4 w-4" />
+      <Wallet className="size-4" />
       Connect Wallet
     </Button>
   );

@@ -106,14 +106,14 @@ function BackgroundDecoration() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed inset-0 -z-10 select-none overflow-hidden"
+      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden select-none"
     >
       {/* Top-left: Effect purple orb */}
-      <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-gradient-to-br from-violet-600/10 to-blue-500/5 blur-3xl" />
+      <div className="absolute -top-40 -left-40 size-96 rounded-full bg-linear-to-br from-violet-600/10 to-blue-500/5 blur-3xl" />
       {/* Bottom-right: Blue orb */}
-      <div className="absolute -right-40 -bottom-40 h-96 w-96 rounded-full bg-gradient-to-tl from-blue-500/10 to-violet-600/5 blur-3xl" />
+      <div className="absolute -right-40 -bottom-40 size-96 rounded-full bg-linear-to-tl from-blue-500/10 to-violet-600/5 blur-3xl" />
       {/* Center-right: Ethereum accent (lg only) */}
-      <div className="absolute top-1/3 right-10 hidden h-64 w-64 rotate-45 bg-gradient-to-br from-[#627eea]/8 to-[#8c8dfc]/5 blur-2xl lg:block" />
+      <div className="absolute top-1/3 right-10 hidden size-64 rotate-45 bg-linear-to-br from-[#627eea]/8 to-[#8c8dfc]/5 blur-2xl lg:block" />
     </div>
   );
 }
@@ -124,14 +124,14 @@ function TechCard({ tech }: { tech: TechItem }) {
       className="rounded-lg border border-black/8 bg-white/50 p-3 transition-colors hover:bg-black/5 dark:border-white/[.145] dark:bg-black/20 dark:hover:bg-white/5"
       href={tech.url}
     >
-      <tech.icon className="mb-1 h-5 w-5 text-black dark:text-white" />
-      <div className="font-semibold text-sm tracking-tight">
+      <tech.icon className="mb-1 size-5 text-black dark:text-white" />
+      <div className="text-sm font-semibold tracking-tight">
         {tech.name}
         {Boolean(tech.version) && (
           <span className="ml-1 text-gray-600 dark:text-gray-400">{tech.version}</span>
         )}
       </div>
-      <div className="mt-0.5 text-gray-600 text-xs dark:text-gray-400">{tech.description}</div>
+      <div className="mt-0.5 text-xs text-gray-600 dark:text-gray-400">{tech.description}</div>
     </SmartLink>
   );
 }
@@ -139,7 +139,7 @@ function TechCard({ tech }: { tech: TechItem }) {
 function TechStackSection() {
   return (
     <div className="flex flex-col gap-3">
-      <h2 className="text-center font-semibold text-base">Built with Modern Tools</h2>
+      <h2 className="text-center text-base font-semibold">Built with Modern Tools</h2>
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
         {TECH_STACK.map((tech) => (
           <TechCard key={tech.name} tech={tech} />
@@ -161,7 +161,7 @@ function Header() {
           src="/next.svg"
           width={0}
         />
-        <span className="font-semibold text-xl">+ Effect-EVM</span>
+        <span className="text-xl font-semibold">+ Effect-EVM</span>
       </div>
       <WalletButton />
     </header>
@@ -175,17 +175,17 @@ function WalletSection() {
     return (
       <div className="flex flex-col items-center gap-6 text-center">
         <div className="flex items-center gap-3">
-          <Layers className="h-10 w-10 text-blue-500" />
-          <h1 className="font-bold text-4xl tracking-tight sm:text-5xl">Effect-EVM Template</h1>
+          <Layers className="size-10 text-blue-500" />
+          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Effect-EVM Template</h1>
         </div>
-        <p className="max-w-md text-gray-600 text-lg dark:text-gray-400">
+        <p className="max-w-md text-lg text-gray-600 dark:text-gray-400">
           Connect your wallet to Ethereum view token balances and make transfers.
         </p>
         <SmartLink
-          className="flex items-center gap-2 text-gray-500 text-sm transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+          className="flex items-center gap-2 text-sm text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
           href="https://github.com/PaulRBerg/prb-effect"
         >
-          <Github className="h-4 w-4" />
+          <Github className="size-4" />
           View Source
         </SmartLink>
       </div>
@@ -195,11 +195,11 @@ function WalletSection() {
   return (
     <div className="grid w-full max-w-2xl grid-cols-1 gap-8 md:grid-cols-2">
       <div className="flex flex-col gap-4">
-        <h2 className="font-semibold text-lg">Token Balance</h2>
+        <h2 className="text-lg font-semibold">Token Balance</h2>
         <TokenBalance />
       </div>
       <div className="flex flex-col gap-4">
-        <h2 className="font-semibold text-lg">Transfer Token</h2>
+        <h2 className="text-lg font-semibold">Transfer Token</h2>
         <TransferForm />
       </div>
     </div>

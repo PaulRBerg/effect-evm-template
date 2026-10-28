@@ -1,5 +1,7 @@
 import "./node_modules/@prb/devkit/just/base.just"
 
+set dotenv-filename := ".env.local"
+
 # ---------------------------------------------------------------------------- #
 #                                 DEPENDENCIES                                 #
 # ---------------------------------------------------------------------------- #
@@ -27,6 +29,51 @@ deploy environment="production":
     na vercel build --target={{ environment }} --token=$VERCEL_TOKEN
     na vercel deploy --target={{ environment }} --prebuilt --token=$VERCEL_TOKEN
 alias d := deploy
+
+# ---------------------------------------------------------------------------- #
+#                                    CHECKS                                    #
+# ---------------------------------------------------------------------------- #
+
+# Run all code checks
+[group("checks"), no-cd]
+@_full-check:
+    just _run-with-status biome-check
+    just _run-with-status eslint-check
+    just _run-with-status prettier-check
+    just _run-with-status type-check
+
+# Run all code fixes
+[group("checks"), no-cd]
+@_full-write:
+    just _run-with-status biome-write
+    just _run-with-status eslint-write
+    just _run-with-status prettier-write
+
+# ---------------------------------------------------------------------------- #
+#                                    ESLINT                                    #
+# ---------------------------------------------------------------------------- #
+
+# Run ESLint checks
+[group("checks")]
+@eslint-check dir=".":
+    just _run-eslint {{ dir }}
+alias ec := eslint-check
+
+# Run ESLint auto-fixes
+[group("checks")]
+@eslint-write dir=".":
+    just _run-eslint {{ dir }} --fix
+alias ew := eslint-write
+
+# Private ESLint invocation helper
+[private]
+@_run-eslint dir *args:
+    na eslint \
+        --cache \
+        --cache-location node_modules/.cache/eslint/.eslintcache \
+        --concurrency auto \
+        {{ args }} \
+        {{ dir }}
 
 # ---------------------------------------------------------------------------- #
 #                                      APP                                     #

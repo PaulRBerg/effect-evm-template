@@ -1,6 +1,6 @@
 {
-  "name": "@prb/next-template",
-  "description": "Next.js template for building web applications.",
+  "name": "@prb/effect-evm-template",
+  "description": "Next.js template for Ethereum apps built with Effect, Reown AppKit, Wagmi, and Viem.",
   "private": true,
   "version": "1.0.0",
   "dependencies": {
@@ -29,8 +29,12 @@
     "@types/node": "^24.10.9",
     "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3",
+    "@typescript-eslint/parser": "^8.72.0",
     "@typescript/native-preview": "^7.0.0-dev.20260203.1",
     "babel-plugin-react-compiler": "^1.0.0",
+    "eslint": "^10.13.0",
+    "eslint-plugin-better-tailwindcss": "^4.10.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "prettier": "^3.8.1",

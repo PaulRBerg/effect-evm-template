@@ -23,20 +23,27 @@ After generating code, run these commands **in order**.
 
 2. **`na biome lint <files>`** — lint JS/TS/JSON/CSS/GraphQL (skip if none changed)
 
-3. **`na tsgo --noEmit`** — verify TypeScript types (always run on entire project)
+3. **`na eslint <files>`** — validate Tailwind CSS classes and React Hooks dependencies for changed TypeScript files
+
+4. **`na tsgo --noEmit`** — verify TypeScript types (always run on entire project)
 
 **Examples:**
 
 ```bash
 # Fewer than 10 files: use specific paths and/or globs
 na biome lint app/page.tsx lib/**/*
+na eslint app/page.tsx lib/**/*
 
 # 10+ files: run default command
 na biome lint
+na eslint .
 
 # TypeScript check runs on entire project
 na tsgo --noEmit
 ```
+
+ESLint owns Tailwind CSS class semantics and React Hooks dependency validation. `just full-check` includes ESLint;
+`just full-write` applies its fixes. The pre-commit hook runs the configured lint-staged checks.
 
 If any command fails, analyze the errors and fix only those related to files you changed.
 

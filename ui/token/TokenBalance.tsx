@@ -50,8 +50,8 @@ export function TokenBalance() {
 
   return (
     <div className="flex flex-col gap-1">
-      <div className="text-gray-500 text-sm">Your {token.symbol} Balance</div>
-      <div className="font-mono font-semibold text-2xl">
+      <div className="text-sm text-gray-500">Your {token.symbol} Balance</div>
+      <div className="font-mono text-2xl font-semibold">
         {formattedBalance} {token.symbol}
       </div>
     </div>

@@ -107,7 +107,7 @@ export function TransferForm() {
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-2">
-        <label className="font-medium text-sm" htmlFor="recipient">
+        <label className="text-sm font-medium" htmlFor="recipient">
           Recipient Address
         </label>
         <input
@@ -120,12 +120,12 @@ export function TransferForm() {
           value={recipient}
         />
         {recipient && !isValidRecipient && (
-          <span className="text-red-500 text-sm">Please enter a valid Ethereum address</span>
+          <span className="text-sm text-red-500">Please enter a valid Ethereum address</span>
         )}
       </div>
 
       <div className="flex flex-col gap-2">
-        <label className="font-medium text-sm" htmlFor="amount">
+        <label className="text-sm font-medium" htmlFor="amount">
           Amount ({token.symbol})
         </label>
         <input
@@ -148,19 +148,19 @@ export function TransferForm() {
       >
         {isSubmitting ? (
           <>
-            <Loader2 className="h-4 w-4 animate-spin" />
+            <Loader2 className="size-4 animate-spin" />
             {status === "signing" ? "Signing..." : "Confirming..."}
           </>
         ) : (
           <>
-            <ArrowRight className="h-4 w-4" />
+            <ArrowRight className="size-4" />
             Transfer {token.symbol}
           </>
         )}
       </Button>
 
       {isConfirmed && txHash && chainId && (
-        <div className="rounded-lg bg-green-50 p-3 text-green-800 text-sm dark:bg-green-900/20 dark:text-green-400">
+        <div className="rounded-lg bg-green-50 p-3 text-sm text-green-800 dark:bg-green-900/20 dark:text-green-400">
           Transaction confirmed!{" "}
           <SmartLink className="underline" href={getBlockExplorerTxUrl(chainId, txHash)}>
             View on Etherscan
@@ -169,7 +169,7 @@ export function TransferForm() {
       )}
 
       {isFailed && (
-        <div className="rounded-lg bg-red-50 p-3 text-red-800 text-sm dark:bg-red-900/20 dark:text-red-400">
+        <div className="rounded-lg bg-red-50 p-3 text-sm text-red-800 dark:bg-red-900/20 dark:text-red-400">
           Transaction failed. Please try again.
         </div>
       )}

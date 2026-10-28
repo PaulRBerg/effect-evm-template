@@ -33,7 +33,7 @@ const steps = [
     description: (
       <>
         Create a{" "}
-        <code className="rounded bg-amber-100 px-1.5 py-0.5 font-mono text-sm dark:bg-amber-400/10 dark:text-amber-200">
+        <code className="rounded-sm bg-amber-100 px-1.5 py-0.5 font-mono text-sm dark:bg-amber-400/10 dark:text-amber-200">
           .env.local
         </code>{" "}
         file in your project root with:
@@ -48,11 +48,11 @@ const steps = [
     description: (
       <>
         Stop the server (
-        <code className="rounded bg-amber-100 px-1.5 py-0.5 font-mono text-sm dark:bg-amber-400/10 dark:text-amber-200">
+        <code className="rounded-sm bg-amber-100 px-1.5 py-0.5 font-mono text-sm dark:bg-amber-400/10 dark:text-amber-200">
           Ctrl+C
         </code>
         ) and run{" "}
-        <code className="rounded bg-amber-100 px-1.5 py-0.5 font-mono text-sm dark:bg-amber-400/10 dark:text-amber-200">
+        <code className="rounded-sm bg-amber-100 px-1.5 py-0.5 font-mono text-sm dark:bg-amber-400/10 dark:text-amber-200">
           just dev
         </code>{" "}
         again.
@@ -71,10 +71,10 @@ export function ReownSetupGuide() {
             <Key className="size-5 text-amber-600 dark:text-amber-200" />
           </div>
           <div>
-            <h1 className="font-semibold text-lg text-neutral-900 dark:text-neutral-100">
+            <h1 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
               Reown Project ID Required
             </h1>
-            <p className="text-neutral-600 text-sm dark:text-neutral-400">
+            <p className="text-sm text-neutral-600 dark:text-neutral-400">
               Complete the setup to connect wallets
             </p>
           </div>
@@ -83,12 +83,12 @@ export function ReownSetupGuide() {
         <ol className="space-y-4">
           {steps.map((step, index) => (
             <li className="flex gap-3" key={step.title}>
-              <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-amber-500 font-medium text-sm text-white dark:bg-amber-400/20 dark:text-amber-200 dark:ring-1 dark:ring-amber-400/40">
+              <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-amber-500 text-sm font-medium text-white dark:bg-amber-400/20 dark:text-amber-200 dark:ring-1 dark:ring-amber-400/40">
                 {index + 1}
               </span>
               <div className="pt-0.5">
                 <p className="font-medium text-neutral-900 dark:text-neutral-100">{step.title}</p>
-                <div className="mt-1 text-neutral-600 text-sm leading-relaxed dark:text-neutral-300">
+                <div className="mt-1 text-sm/relaxed text-neutral-600 dark:text-neutral-300">
                   {step.description}
                 </div>
               </div>
@@ -96,7 +96,7 @@ export function ReownSetupGuide() {
           ))}
         </ol>
 
-        <div className="mt-6 flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 p-3 text-neutral-700 text-sm dark:border-amber-900/50 dark:bg-neutral-800/70 dark:text-neutral-300">
+        <div className="mt-6 flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-neutral-700 dark:border-amber-900/50 dark:bg-neutral-800/70 dark:text-neutral-300">
           <Settings className="size-4 shrink-0" />
           <span>
             Need help? Check the{" "}
