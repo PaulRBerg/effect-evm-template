@@ -69,7 +69,7 @@ const TECH_STACK: TechItem[] = [
     icon: Code,
     name: "TypeScript",
     url: "https://typescriptlang.org",
-    version: "v5",
+    version: "v7",
   },
   {
     description: "Utility-first CSS",

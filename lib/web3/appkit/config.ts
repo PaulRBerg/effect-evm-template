@@ -41,7 +41,7 @@ export function createAppKitLayer() {
         networks: chains,
         projectId,
         ssr: true,
-        storage: createStorage({ storage: cookieStorage }),
+        storage: createStorage<Record<string, unknown>>({ storage: cookieStorage }),
       });
 
       const modal = createAppKit({

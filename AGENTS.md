@@ -25,7 +25,7 @@ After generating code, run these commands **in order**.
 
 3. **`na eslint <files>`** — validate Tailwind CSS classes and React Hooks dependencies for changed TypeScript files
 
-4. **`na tsgo --noEmit`** — verify TypeScript types (always run on entire project)
+4. **`na tsc --noEmit`** — verify TypeScript types (always run on entire project)
 
 **Examples:**
 
@@ -39,7 +39,7 @@ na biome lint
 na eslint .
 
 # TypeScript check runs on entire project
-na tsgo --noEmit
+na tsc --noEmit
 ```
 
 ESLint owns Tailwind CSS class semantics and React Hooks dependency validation. `just full-check` includes ESLint;
@@ -57,6 +57,12 @@ ni package-name      # Add dependency
 ni -D package-name   # Add dev dependency
 nun package-name     # Remove dependency
 ```
+
+Keep Wagmi on v2 while this template uses Reown AppKit. Do not upgrade it to v3 without replacing or verifying the Reown
+integration, even when published peer ranges permit v3.
+
+`@typescript/native` provides the TypeScript 7 compiler. The `typescript` alias provides the TypeScript 6 API required
+by Next.js and ESLint. Preserve both roles when updating dependencies.
 
 ## Code Standards
 
